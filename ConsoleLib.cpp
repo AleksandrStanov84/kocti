@@ -1,15 +1,3 @@
-/*********************************************************************/
-/*                                                                   */
-/*    ConsoleLib [Release 2.1.1]                                     */
-/*    Библиотека функций-оберток для работы с консолью               */
-/*                                                                   */
-/*    Copyright (с) 2006-2016, Дмитрий Барабаш                       */
-/*                                                                   */
-/*    E-mail:   dmitry@barabash.com                                  */
-/*    Web:      http://itstep.barabash.com                           */
-/*                                                                   */
-/*********************************************************************/
-
 #include <iostream>
 using namespace std;
 
@@ -17,46 +5,46 @@ using namespace std;
 #include "ConsoleLib.h"
 
 
-// Хендлы консоли
+// Г•ГҐГ­Г¤Г«Г» ГЄГ®Г­Г±Г®Г«ГЁ
 HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 HANDLE hStdIn = GetStdHandle(STD_INPUT_HANDLE);
 
 
-// Показываем/прячем текстовый курсор
+// ГЏГ®ГЄГ Г§Г»ГўГ ГҐГ¬/ГЇГ°ГїГ·ГҐГ¬ ГІГҐГЄГ±ГІГ®ГўГ»Г© ГЄГіГ°Г±Г®Г°
 void ShowCursor(bool visible)
 {
 	CONSOLE_CURSOR_INFO cci = { sizeof(cci), visible };
 	SetConsoleCursorInfo(hStdOut, &cci);
 }
 
-// Устанавливает цвет символов и фона
+// Г“Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГІ Г¶ГўГҐГІ Г±ГЁГ¬ГўГ®Г«Г®Гў ГЁ ГґГ®Г­Г 
 void SetColor(ConsoleColor text, ConsoleColor background)
 {
     SetConsoleTextAttribute(hStdOut, (WORD)((background << 4) | text));
 }
 
-// Перемещает курсор в заданную позицию
+// ГЏГҐГ°ГҐГ¬ГҐГ№Г ГҐГІ ГЄГіГ°Г±Г®Г° Гў Г§Г Г¤Г Г­Г­ГіГѕ ГЇГ®Г§ГЁГ¶ГЁГѕ
 void GotoXY(int X, int Y)
 {
     COORD coord = { (SHORT)X, (SHORT)Y };
     SetConsoleCursorPosition(hStdOut, coord);
 }
 
-// Выводит заданную строку в заданную позицию
+// Г‚Г»ГўГ®Г¤ГЁГІ Г§Г Г¤Г Г­Г­ГіГѕ Г±ГІГ°Г®ГЄГі Гў Г§Г Г¤Г Г­Г­ГіГѕ ГЇГ®Г§ГЁГ¶ГЁГѕ
 void WriteStr(int X, int Y, const char *Str)
 {
     GotoXY(X, Y);
     cout << Str << flush;
 }
 
-// Выводит заданный символ начиная с заданной позиции
+// Г‚Г»ГўГ®Г¤ГЁГІ Г§Г Г¤Г Г­Г­Г»Г© Г±ГЁГ¬ГўГ®Г« Г­Г Г·ГЁГ­Г Гї Г± Г§Г Г¤Г Г­Г­Г®Г© ГЇГ®Г§ГЁГ¶ГЁГЁ
 void WriteChar(int X, int Y, char Ch)
 {
 	GotoXY(X, Y);
 	cout << Ch;
 }
 
-// Выводит указанное количество заданных символов начиная с заданной позиции
+// Г‚Г»ГўГ®Г¤ГЁГІ ГіГЄГ Г§Г Г­Г­Г®ГҐ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г§Г Г¤Г Г­Г­Г»Гµ Г±ГЁГ¬ГўГ®Г«Г®Гў Г­Г Г·ГЁГ­Г Гї Г± Г§Г Г¤Г Г­Г­Г®Г© ГЇГ®Г§ГЁГ¶ГЁГЁ
 void WriteChars(int X, int Y, char Ch, unsigned Len)
 {
 	GotoXY(X, Y);
@@ -64,7 +52,7 @@ void WriteChars(int X, int Y, char Ch, unsigned Len)
 		cout << Ch;
 }
 
-// Меняет текстовые атрибуты, начиная с заданной позиции
+// ГЊГҐГ­ГїГҐГІ ГІГҐГЄГ±ГІГ®ГўГ»ГҐ Г ГІГ°ГЁГЎГіГІГ», Г­Г Г·ГЁГ­Г Гї Г± Г§Г Г¤Г Г­Г­Г®Г© ГЇГ®Г§ГЁГ¶ГЁГЁ
 void ChangeTextAttr(int X, int Y, ConsoleColor text, ConsoleColor background, unsigned Len)
 {
 	COORD coord = { (SHORT)X, (SHORT)Y };
