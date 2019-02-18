@@ -22,7 +22,7 @@ int Menu(const char *menuItems, int countItems)
 {
 	const int Esc = 27;
 
-	cout << menuItems << "ÑÄÅËÀÉÒÅ ÂÀØ ÂÛÁÎÐ (or Esc to exit): [ ]\b\b" << flush;
+	cout << menuItems << "Ã‘Ã„Ã…Ã‹Ã€Ã‰Ã’Ã… Ã‚Ã€Ã˜ Ã‚Ã›ÃÃŽÃ (or Esc to exit): [ ]\b\b" << flush;
 
 	char key;
 	do
@@ -63,26 +63,26 @@ void enterManPhone(manName &st)
 {
 	char str[200];
 
-	cout << "Ô.È.Î: ";
+	cout << "Ã”.Ãˆ.ÃŽ: ";
 	cin.ignore(1);
 	cin.getline(str, 200);
 
 	st.surName = new char[strlen(str) + 1];
 	strcpy(st.surName, str);
 
-	cout << "ÀÄÐÅÑ: ";
+	cout << "Ã€Ã„ÃÃ…Ã‘: ";
 	cin.getline(str, 100);
 
 	st.adress = new char[strlen(str) + 1];
 	strcpy(st.adress, str);
 
-	cout << "ÒÅËÅÔÎÍ: ";
+	cout << "Ã’Ã…Ã‹Ã…Ã”ÃŽÃ: ";
 	cin >> st.phone;
 }
 
 void enterCountManPhoneBook(manName *&manNames, int &manCount)
 {
-	cout << "ÂÂÅÄÈÒÅ ÊÎË-ÂÎ ËÞÄÅÉ: ";
+	cout << "Ã‚Ã‚Ã…Ã„ÃˆÃ’Ã… ÃŠÃŽÃ‹-Ã‚ÃŽ Ã‹ÃžÃ„Ã…Ã‰: ";
 	cin >> manCount;
 	cout << endl;
 
@@ -97,9 +97,9 @@ void enterCountManPhoneBook(manName *&manNames, int &manCount)
 
 void printManNameInfo(const manName &st)
 {
-	cout << "Ô.È.Î: " << st.surName << endl
-		 << "ÀÄÐÅÑ: " << st.adress << endl
-		 << "ÒÅËÅÔÎÍ: " << st.phone << endl;
+	cout << "Ã”.Ãˆ.ÃŽ: " << st.surName << endl
+		 << "Ã€Ã„ÃÃ…Ã‘: " << st.adress << endl
+		 << "Ã’Ã…Ã‹Ã…Ã”ÃŽÃ: " << st.phone << endl;
 }
 
 void printManBookInfo(const manName *manNames, int manCount)
@@ -124,11 +124,11 @@ void saveNameToFile(const manName &st, FILE *file)
 	fwrite(&st.phone, sizeof(st.phone), len, file);
 }
 
-void saveNameBooktoFile(const manName *manNames, int manCount)
+void saveNameBookToFile(const manName *manNames, int manCount)
 {
 	if (manCount == 0)
 	{
-		cout << "Íå÷åãî ñîõðîíÿòü!\n\n";
+		cout << "ÃÃ¥Ã·Ã¥Ã£Ã® Ã±Ã®ÃµÃ°Ã®Ã­Ã¿Ã²Ã¼!\n\n";
 		return;
 	}
 
@@ -136,7 +136,7 @@ void saveNameBooktoFile(const manName *manNames, int manCount)
 
 	if ((file = fopen(fileName, "w")) == nullptr)
 	{
-		cout << "Íåâîçìîæíî îòêðûòü ôàéë";
+		cout << "ÃÃ¥Ã¢Ã®Ã§Ã¬Ã®Ã¦Ã­Ã® Ã®Ã²ÃªÃ°Ã»Ã²Ã¼ Ã´Ã Ã©Ã«";
 		return;
 	}
 	fwrite(&manCount, sizeof(manCount), 1, file);
@@ -145,7 +145,7 @@ void saveNameBooktoFile(const manName *manNames, int manCount)
 		saveNameToFile(manNames[i], file);
 	fclose(file);
 
-	cout << "Ôàéë ñîõðàíåí óäà÷íî.\n\n";	
+	cout << "Ã”Ã Ã©Ã« Ã±Ã®ÃµÃ°Ã Ã­Ã¥Ã­ Ã³Ã¤Ã Ã·Ã­Ã®.\n\n";	
 }
 
 void loadNameToFile(manName &st, FILE *file)
@@ -165,13 +165,13 @@ void loadNameToFile(manName &st, FILE *file)
 	fread(&st.phone, sizeof(st.phone), len, file);
 }
 
-void loadNameBookToFile(manName *&manNames, int &manCount)
+void loadNameBooktoFile(manName *&manNames, int &manCount)
 {
 	int len;
 	FILE *file;
 	if ((file = fopen(fileName, "r")) == nullptr)
 	{
-		cout << "Íåâîçìîæíî îòêðûòü ôàéë";
+		cout << "ÃÃ¥Ã¢Ã®Ã§Ã¬Ã®Ã¦Ã­Ã® Ã®Ã²ÃªÃ°Ã»Ã²Ã¼ Ã´Ã Ã©Ã«";
 		return;
 	}
 
@@ -181,11 +181,11 @@ void loadNameBookToFile(manName *&manNames, int &manCount)
 
 	manNames = new manName[manCount];
 
-	for (int i = 0; i < manCount; i++) // äîáàòü äèíàì ïàìÿòü
+	for (int i = 0; i < manCount; i++) // Ã¤Ã®Ã¡Ã Ã²Ã¼ Ã¤Ã¨Ã­Ã Ã¬ Ã¯Ã Ã¬Ã¿Ã²Ã¼
 		loadNameToFile(manNames[i], file);
 	fclose(file);
 
-	cout << "Ôàéë çàãðóæåí óäà÷íî.\n\n";
+	cout << "Ã”Ã Ã©Ã« Ã§Ã Ã£Ã°Ã³Ã¦Ã¥Ã­ Ã³Ã¤Ã Ã·Ã­Ã®.\n\n";
 }
 
 
@@ -193,14 +193,14 @@ int main()
 {
 	setlocale(LC_ALL,"Russian");
 	char menuItems[] =
-	 "1. Ââåñòè èíôîðìàöèþ\n\n" 
-	 "2. Íàïè÷àòàòü èíôîðìàöèþ\n\n"
-	 "3. Ñîõðàíèòü èíôîðìàöèþ\n\n"
-	 "4. Çàãðóçèòü èíôîðìàöèþ\n\n";
+	 "1. Ã‚Ã¢Ã¥Ã±Ã²Ã¨ Ã¨Ã­Ã´Ã®Ã°Ã¬Ã Ã¶Ã¨Ã¾\n\n" 
+	 "2. ÃÃ Ã¯Ã¨Ã·Ã Ã²Ã Ã²Ã¼ Ã¨Ã­Ã´Ã®Ã°Ã¬Ã Ã¶Ã¨Ã¾\n\n"
+	 "3. Ã‘Ã®ÃµÃ°Ã Ã­Ã¨Ã²Ã¼ Ã¨Ã­Ã´Ã®Ã°Ã¬Ã Ã¶Ã¨Ã¾\n\n"
+	 "4. Ã‡Ã Ã£Ã°Ã³Ã§Ã¨Ã²Ã¼ Ã¨Ã­Ã´Ã®Ã°Ã¬Ã Ã¶Ã¨Ã¾\n\n";
 	cout << endl;
 
-	cout << "Èñïîëüçóéòå öèôðû äëÿ âûáîðà ìåíþ\n";
-	cout << "He çàáûâàéòå íàæèìàòü 'Enter' ïîñëå Âàøåãî âûáîðà!\n" << endl;
+	cout << "ÃˆÃ±Ã¯Ã®Ã«Ã¼Ã§Ã³Ã©Ã²Ã¥ Ã¶Ã¨Ã´Ã°Ã» Ã¤Ã«Ã¿ Ã¢Ã»Ã¡Ã®Ã°Ã  Ã¬Ã¥Ã­Ã¾\n";
+	cout << "He Ã§Ã Ã¡Ã»Ã¢Ã Ã©Ã²Ã¥ Ã­Ã Ã¦Ã¨Ã¬Ã Ã²Ã¼ 'Enter' Ã¯Ã®Ã±Ã«Ã¥ Ã‚Ã Ã¸Ã¥Ã£Ã® Ã¢Ã»Ã¡Ã®Ã°Ã !\n" << endl;
 
 	int manCount = 0;
 	manName *manNames = nullptr;
